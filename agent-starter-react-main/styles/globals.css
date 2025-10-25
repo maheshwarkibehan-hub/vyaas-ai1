@@ -1,0 +1,337 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --radius: 0.625rem;
+  /* VYAAS AI Lovable-inspired Color Scheme */
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --card: rgba(255, 255, 255, 0.05);
+  --card-foreground: #ffffff;
+  --popover: rgba(255, 255, 255, 0.1);
+  --popover-foreground: #ffffff;
+  --primary: #ff6b6b;
+  --primary-foreground: #ffffff;
+  --secondary: #4ecdc4;
+  --secondary-foreground: #ffffff;
+  --muted: rgba(255, 255, 255, 0.1);
+  --muted-foreground: rgba(255, 255, 255, 0.7);
+  --accent: #45b7d1;
+  --accent-foreground: #ffffff;
+  --destructive: #ff4757;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: #ff6b6b;
+  --chart-1: #ff6b6b;
+  --chart-2: #4ecdc4;
+  --chart-3: #45b7d1;
+  --chart-4: #96ceb4;
+  --chart-5: #feca57;
+  --sidebar: rgba(255, 255, 255, 0.05);
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ff6b6b;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #4ecdc4;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #ff6b6b;
+}
+
+.dark {
+  /* Keep the same Lovable-inspired colors for dark mode */
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --card: rgba(255, 255, 255, 0.05);
+  --card-foreground: #ffffff;
+  --popover: rgba(255, 255, 255, 0.1);
+  --popover-foreground: #ffffff;
+  --primary: #ff6b6b;
+  --primary-foreground: #ffffff;
+  --secondary: #4ecdc4;
+  --secondary-foreground: #ffffff;
+  --muted: rgba(255, 255, 255, 0.1);
+  --muted-foreground: rgba(255, 255, 255, 0.7);
+  --accent: #45b7d1;
+  --accent-foreground: #ffffff;
+  --destructive: #ff4757;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: #ff6b6b;
+  --chart-1: #ff6b6b;
+  --chart-2: #4ecdc4;
+  --chart-3: #45b7d1;
+  --chart-4: #96ceb4;
+  --chart-5: #feca57;
+  --sidebar: rgba(255, 255, 255, 0.05);
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ff6b6b;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #4ecdc4;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #ff6b6b;
+}
+
+@theme inline {
+  --font-sans:
+    'Orbitron', 'Rajdhani', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-mono:
+    var(--font-commit-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-foreground/20 outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utils {
+  .animate-text-shimmer {
+    animation-delay: 0.5s;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-name: text-shimmer;
+    background: var(--muted-foreground)
+      gradient(
+        linear,
+        100% 0,
+        0 0,
+        from(var(--muted-foreground)),
+        color-stop(0.5, var(--secondary-foreground)),
+        to(var(--muted-foreground))
+      );
+    background: var(--muted-foreground) -webkit-gradient(
+        linear,
+        100% 0,
+        0 0,
+        from(var(--muted-foreground)),
+        color-stop(0.5, var(--secondary-foreground)),
+        to(var(--muted-foreground))
+      );
+    background-repeat: no-repeat;
+    background-size: 50% 200%;
+    display: inline-block;
+  }
+
+  @keyframes text-shimmer {
+    0% {
+      background-position: -100% 0;
+    }
+    100% {
+      background-position: 250% 0;
+    }
+  }
+
+  /* VYAAS AI Cute Aesthetic Animations */
+  .animate-bounce-gentle {
+    animation: bounce-gentle 2s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.5s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.4s ease-out;
+  }
+
+  .animate-pop-in {
+    animation: pop-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .animate-pop-out {
+    animation: pop-out 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  /* iOS Glass Design Effects */
+  .effect-glass-ios {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .effect-glass-ios-strong {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .effect-cute-hover:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(255, 105, 180, 0.2);
+  }
+
+  .effect-soft-glow {
+    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.1);
+  }
+
+  .effect-soft-glow:hover {
+    box-shadow: 0 8px 30px rgba(255, 105, 180, 0.2);
+  }
+
+  .text-cute {
+    font-family: 'Inter', 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', cursive;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .text-curvy {
+    font-family: 'Inter', 'Brush Script MT', 'Lucida Handwriting', cursive;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  .text-bbh {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+
+  .text-glass-bg {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 8px 16px;
+    display: inline-block;
+  }
+
+  /* Keyframes */
+  @keyframes bounce-gentle {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 4px 20px rgba(255, 105, 180, 0.1);
+    }
+    50% {
+      box-shadow: 0 8px 30px rgba(255, 105, 180, 0.2), 0 12px 40px rgba(255, 105, 180, 0.1);
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes pop-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.3) translateY(20px);
+    }
+    50% {
+      transform: scale(1.1) translateY(-5px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes pop-out {
+    0% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.3) translateY(20px);
+    }
+  }
+}
