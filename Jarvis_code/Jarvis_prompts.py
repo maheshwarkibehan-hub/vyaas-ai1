@@ -1,6 +1,8 @@
+import asyncio
 import requests
 from Jarvis_google_search import get_current_datetime
 from jarvis_get_weather import get_weather
+
 
 # ✅ Get current city (sync for easier use)
 def get_current_city():
@@ -11,15 +13,22 @@ def get_current_city():
     except Exception:
         return "Unknown"
 
-# ✅ Load all dynamic values (sync version)
-def load_prompts():
-    current_datetime = get_current_datetime()  # ✅ No await, no ainvoke
+
+# ✅ Async version to handle async coroutines properly
+async def load_prompts_async():
+    # Await both async functions safely
+    current_datetime = await get_current_datetime()
+
     city = get_current_city()
-    weather = get_weather(city) if city != "Unknown" else "मौसम की जानकारी उपलब्ध नहीं है।"
+
+    if city != "Unknown":
+        weather = await get_weather(city)
+    else:
+        weather = "मौसम की जानकारी उपलब्ध नहीं है।"
 
     # --- Instructions Prompt ---
     instructions_prompt = f'''  
-आप Vyaas हैं — एक advanced voice-based AI assistant, जिसे Maheshwar Hari Tripathi ने design और program किया है।  
+आप Vyaas हैं — एक advanced voice-based AI assistant, जिसे Maheshwar Hari Tripaathi ने design और program किया है।  
 User से Hinglish में बात करें — बिल्कुल वैसे जैसे आम भारतीय English और Hindi का मिश्रण करके naturally बात करते हैं।  
 - Hindi शब्दों को देवनागरी (हिन्दी) में लिखें। Example के लिए: 'तू tension मत ले, सब हो जाएगा।', 'बस timepass कर रहा हूँ अभी।', and "Client के साथ call है अभी।"  
 - Modern Indian assistant की तरह fluently बोलें।  
@@ -36,7 +45,7 @@ Tip: जब भी कोई task ऊपर दिए गए tools से पू
 
     # --- Reply Prompt ---
     Reply_prompts = f"""
-सबसे पहले, अपना नाम बताइए — 'मैं Vyaas हूं, आपका Personal AI Assistant, जिसे Maheshwar Hari Tripathi ने Design किया है.'
+सबसे पहले, अपना नाम बताइए — 'मैं Vyaas हूं, आपका Personal AI Assistant, जिसे Maheshwar Hari Tripaathi ने Design किया है.'
 
 फिर current समय के आधार पर user को greet कीजिए:
 - यदि सुबह है तो बोलिए: 'Good morning!'
@@ -55,6 +64,12 @@ Tasks को perform करने के लिए निम्न tools का 
 हमेशा Vyaas की तरह composed, polished और Hinglish में बात कीजिए — ताकि conversation real लगे और tech-savvy भी।
 """
     return instructions_prompt, Reply_prompts
+
+
+# ✅ Synchronous wrapper to auto-run async function safely
+def load_prompts():
+    return asyncio.run(load_prompts_async())
+
 
 # ✅ Call once when module loads
 instructions_prompt, Reply_prompts = load_prompts()

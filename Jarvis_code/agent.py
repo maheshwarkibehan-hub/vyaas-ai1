@@ -15,6 +15,8 @@ from keyboard_mouse_CTRL import (
     press_hotkey_tool, control_volume_tool
 )
 from memory_loop import MemoryExtractor
+from Jarvis_image_gen import generate_image_tool
+
 
 load_dotenv()
 
@@ -29,6 +31,7 @@ class Assistant(Agent):
                                 get_current_datetime,
                                 get_weather,
                                 open_app,
+                                generate_image_tool,
                                 close_app,
                                 folder_file,
                                 Play_file,
